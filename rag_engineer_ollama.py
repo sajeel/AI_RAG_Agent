@@ -73,6 +73,13 @@ from langchain.schema import Document
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"Using device: {device}")
 
+# import bentoml
+
+# with bentoml.SyncHTTPClient("https://summarization-zdze-fe5accb1.mt-guc1.bentoml.ai") as client:
+#     result = client.summarize(
+#         texts=[],
+#     )
+
 
 class EnhancedOCRPDFLoader:
     
@@ -281,12 +288,12 @@ class RAGAIEngineer:
             return
 
         if 'vectorstore' not in st.session_state:
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000,
-                chunk_overlap=200,
-                length_function=len,
-                separators=["\n\n", "\n", " ", ""]
-            )
+            # text_splitter = RecursiveCharacterTextSplitter(
+            #     chunk_size=1000,
+            #     chunk_overlap=200,
+            #     length_function=len,
+            #     separators=["\n\n", "\n", " ", ""]
+            # )
             # split_documents = text_splitter.split_documents(self.documents)
             split_documents = self.improved_chunking(self.documents)
             st.write(f"Split documents into {len(split_documents)} chunks")
